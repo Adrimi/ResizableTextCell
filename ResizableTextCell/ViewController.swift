@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private var newCellSize: CGSize = .init(width: 200, height: 50)
+    
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         let f = UICollectionViewFlowLayout()
         f.scrollDirection = .vertical
@@ -56,15 +58,13 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("resizing...")
-        // NOTE: - treat this .init(...) as an initial size for cell
-        guard let cell = collectionView.cellForItem(at: indexPath) as? Cell else { return .init(width: 200, height: 50) }
-        return cell.computedSize
+        newCellSize
     }
 }
 
 extension ViewController: CellDelegate {
-    func updateLayout(_ cell: Cell) {
+    func updateLayout(_ cell: Cell, with newSize: CGSize) {
+        newCellSize = newSize
         
         // NOTE: - You can add some options, but from i have invest. most of them just do not work
         UIView.animate(withDuration: 0.5) {

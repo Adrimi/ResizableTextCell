@@ -9,14 +9,12 @@
 import UIKit
 
 protocol CellDelegate: class {
-    func updateLayout(_ cell: Cell)
+    func updateLayout(_ cell: Cell, with newSize: CGSize)
 }
 
 class Cell: UICollectionViewCell {
     
     weak var delegate: CellDelegate?
-    
-    var computedSize: CGSize = .zero
     
     private lazy var textview: CustomTextView = {
         let t = CustomTextView()
@@ -45,8 +43,7 @@ class Cell: UICollectionViewCell {
 
 extension Cell: CustomTextViewDelegate {
     func updateFrame(_ textView: UITextView) {
-        computedSize = textView.contentSize
-        delegate?.updateLayout(self)
+        delegate?.updateLayout(self, with: textView.contentSize)
     }
 }
 
