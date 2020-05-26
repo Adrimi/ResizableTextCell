@@ -1,3 +1,3 @@
 ## Resizable Text Cell
 
-![GIF](https://github.com/Adrimi/ResizableTextCell/common/test.gif)
+![GIF](https://github.com/Adrimi/ResizableTextCell/blob/master/common/test.gif)
