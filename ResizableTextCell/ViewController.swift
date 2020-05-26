@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: Parameters
     private var newCellSize: CGSize = .init(width: 200, height: 50)
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
         return c
     }()
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +44,7 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: - CollectionView DataSource
 extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -56,19 +59,19 @@ extension ViewController: UICollectionViewDataSource {
     
 }
 
+// MARK: - CollectionView Flow Delegate
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         newCellSize
     }
 }
 
+// MARK: - Custom Cell Delegate
 extension ViewController: CellDelegate {
     func updateLayout(_ cell: Cell, with newSize: CGSize) {
         newCellSize = newSize
         
         // NOTE: - You can add some options, but from i have invest. most of them just do not work
-        UIView.animate(withDuration: 0.5) {
-            self.collectionView.collectionViewLayout.invalidateLayout()
-        }
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
